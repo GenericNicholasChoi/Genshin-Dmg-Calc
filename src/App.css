@@ -30,7 +30,7 @@
 }
 
 h3 {
-  float: left;
+  align-content: initial;
 }
 
 .App-link {
