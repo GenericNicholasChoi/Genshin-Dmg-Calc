@@ -22,7 +22,7 @@ const Characters = [
   { value: "Chongyun", label: "Chongyun" },
   { value: "Bennet", label: "Bennet" },
   { value: "Beidou", label: "Beidou" },
-  { value: "Fischle", label: "Fischl" },
+  { value: "Fischl", label: "Fischl" },
   { value: "Amber", label: "Amber" },
   { value: "Keqing", label: "Keqing" },
   { value: "Klee", label: "Klee" },
