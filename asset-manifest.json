@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Genshin-Dmg-Calc/static/css/main.093d2ad5.chunk.css",
-    "main.js": "/Genshin-Dmg-Calc/static/js/main.12ea6ee8.chunk.js",
-    "main.js.map": "/Genshin-Dmg-Calc/static/js/main.12ea6ee8.chunk.js.map",
+    "main.js": "/Genshin-Dmg-Calc/static/js/main.d4e7b355.chunk.js",
+    "main.js.map": "/Genshin-Dmg-Calc/static/js/main.d4e7b355.chunk.js.map",
     "runtime-main.js": "/Genshin-Dmg-Calc/static/js/runtime-main.5de637c3.js",
     "runtime-main.js.map": "/Genshin-Dmg-Calc/static/js/runtime-main.5de637c3.js.map",
     "static/css/2.e133fd2b.chunk.css": "/Genshin-Dmg-Calc/static/css/2.e133fd2b.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.e133fd2b.chunk.css",
     "static/js/2.cf89eb98.chunk.js",
     "static/css/main.093d2ad5.chunk.css",
-    "static/js/main.12ea6ee8.chunk.js"
+    "static/js/main.d4e7b355.chunk.js"
   ]
 }
