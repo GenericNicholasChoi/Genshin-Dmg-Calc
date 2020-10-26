@@ -97,7 +97,7 @@ Object.freeze(QskillMultis);
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { atk: 0, CR: 0, CD: 0, eSM: [], qSM: [] };
+    this.state = { atk: 0, CR: 0, CD: 0, def: 0, EM: 0, eSM: [], qSM: [] };
   }
 
   calcAtk = atk => {
@@ -111,13 +111,19 @@ class App extends Component {
   calcCR = cr => {
     this.setState({ CR: cr / 100 });
   };
+  calcdef = def => {
+    this.setState({ def: def });
+  };
+  calcEM = em => {
+    this.setState({ EM: em });
+  };
 
   render() {
     return (
       <div className="App">
         <h1 className="App-header"> Genshin Damage Calculator </h1>
         <Grid fluid>
-          <Row>
+          <Row gutter={12}>
             <Col md={12}>
               {" "}
               <h2>Character Stats</h2>
@@ -130,24 +136,72 @@ class App extends Component {
                 size="lg"
                 style={{ width: 224 }}
                 onSelect={(value, eSM) => {
-                  this.setState({ eSM: EskillMultis[value] });
+                  this.setState({
+                    eSM: EskillMultis[value],
+                    qSM: QskillMultis[value]
+                  });
                 }}
               />
+              <Row>
+                <h6> *The Skill Multipliers are based on skill level 1</h6>
+                <h6> Damage Assumes all possible hits are landed</h6>
+                <h6> Damage for DOT is for max ticks (No Swirl dmg)</h6>
+              </Row>
+            </Col>
+          </Row>
+          <Row gutter={10}>
+            <Col xs={24}>
+              <div class="Slider">
+                <h4 style={{ textAlign: "left" }}>Attack</h4>
+                <Atkslider value="atk" max="9999" calcThis={this.calcAtk} />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={24}>
+              <div class="Slider">
+                <h4 style={{ textAlign: "left" }}>Crit Rate %</h4>
+                <Atkslider max="80" calcThis={this.calcCR} />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={24}>
+              <div class="Slider">
+                <h4 style={{ textAlign: "left" }}>Crit Dmg %</h4>
+                <Atkslider calcThis={this.calcCD} max="350" />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4}>
+              <div class="Slider">
+                <h4 style={{ textAlign: "" }}>Defense</h4>
+                <InputNumber
+                  min={0}
+                  max={9999}
+                  value={this.state.def}
+                  onChange={def => {
+                    this.calcdef(def);
+                  }}
+                />
+              </div>
+            </Col>
+            <Col md={6}>
+              <div class="Slider">
+                <h4 style={{ textAlign: "" }}>Elemental Mastery</h4>
+                <InputNumber
+                  min={0}
+                  max={9999}
+                  value={this.state.EM}
+                  onChange={EM => {
+                    this.calcEM(EM);
+                  }}
+                />
+              </div>
             </Col>
           </Row>
 
-          <div class="Slider">
-            <h3>Attack</h3>
-            <Atkslider value="atk" max="9999" calcThis={this.calcAtk} />
-          </div>
-          <div class="Slider">
-            <h3>Crit Rate %</h3>
-            <Atkslider max="80" calcThis={this.calcCR} />
-          </div>
-          <div class="Slider">
-            <h3>Crit Dmg %</h3>
-            <Atkslider calcThis={this.calcCD} max="350" />
-          </div>
           <Row gutter={12}>
             {/* <Col md={8}>
               <h3>Non-Crit Hit</h3>
@@ -202,77 +256,125 @@ class App extends Component {
                 )}
               </h4>
             </Col> */}
-
-            <table>
-              <tr>
-                <th>Skill</th>
-                <br></br>
-                <th>Non-Crit Hit</th>
-                <br></br>
-                <th>Critical Hit</th>
-                <br></br>
-                <th>Expected Damage</th>
-                <br></br>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Normal Attack</h4>
-                </td>
-
-                <td>{Math.round(this.state.atk)}</td>
-                <td>{Math.round(this.state.atk * this.state.CD)}</td>
-                <td>
-                  {Math.round(
-                    (1 - this.state.CR) * this.state.atk +
-                      this.state.CR * (this.state.CD * this.state.atk)
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Elemental Skill</h4>
-                </td>
-                <td>
-                  {Math.round(
-                    this.state.eSM
-                      .map(x => x * this.state.atk)
-                      .reduce((a, b) => a + b, 0)
-                  )}{" "}
-                </td>
-                <td>
-                  {" "}
-                  {Math.round(
-                    this.state.eSM
-                      .map(x => x * this.state.atk * this.state.CD)
-                      .reduce((a, b) => a + b, 0)
-                  )}
-                </td>
-                <td>
-                  {Math.round(
-                    (1 - this.state.CR) * this.state.atk +
-                      this.state.CR * (this.state.CD * this.state.atk)
-                  )}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h4>Elemental Burst</h4>
-                </td>
-                <td>{Math.round(this.state.atk)} </td>
-                <td>{Math.round(this.state.atk * this.state.CD)}</td>
-                <td>
-                  {Math.round(
-                    this.state.eSM
-                      .map(
-                        x =>
-                          x * this.state.atk * (1 - this.state.CR) +
-                          this.state.CR * this.state.CD * this.state.atk * x
-                      )
-                      .reduce((a, b) => a + b, 0)
-                  )}
-                </td>
-              </tr>
-            </table>
+            <Col xs={5}>
+              {" "}
+              <h4>Skill</h4>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h4>Non Crit Hit</h4>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h4>Crit Hit</h4>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h4>Average Damage</h4>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5}>
+              <h4>Basic Attack</h4>
+            </Col>
+            <Col xs={5}>
+              <h5>{Math.round(this.state.atk)} </h5>
+            </Col>
+            <Col xs={5}>
+              <h5>{Math.round(this.state.atk * this.state.CD)} </h5>
+            </Col>
+            <Col xs={5}>
+              <h5>
+                {Math.round(
+                  (1 - this.state.CR) * this.state.atk +
+                    this.state.CR * (this.state.CD * this.state.atk)
+                )}{" "}
+              </h5>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5}>
+              <h4>Elemental Skill</h4>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h5>
+                {" "}
+                {Math.round(
+                  this.state.eSM
+                    .map(x => x * this.state.atk)
+                    .reduce((a, b) => a + b, 0)
+                )}{" "}
+              </h5>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h5>
+                {" "}
+                {Math.round(
+                  this.state.eSM
+                    .map(x => x * this.state.atk * this.state.CD)
+                    .reduce((a, b) => a + b, 0)
+                )}
+              </h5>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h5>
+                {" "}
+                {Math.round(
+                  this.state.eSM
+                    .map(
+                      x =>
+                        x * this.state.atk * (1 - this.state.CR) +
+                        this.state.CR * this.state.CD * this.state.atk * x
+                    )
+                    .reduce((a, b) => a + b, 0)
+                )}
+              </h5>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={5}>
+              <h4>Elemental Burst</h4>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h5>
+                {" "}
+                {Math.round(
+                  this.state.qSM
+                    .map(x => x * this.state.atk)
+                    .reduce((a, b) => a + b, 0)
+                )}{" "}
+              </h5>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h5>
+                {" "}
+                {Math.round(
+                  this.state.qSM
+                    .map(x => x * this.state.atk * this.state.CD)
+                    .reduce((a, b) => a + b, 0)
+                )}
+              </h5>
+            </Col>
+            <Col xs={5}>
+              {" "}
+              <h5>
+                {" "}
+                {Math.round(
+                  this.state.qSM
+                    .map(
+                      x =>
+                        x * this.state.atk * (1 - this.state.CR) +
+                        this.state.CR * this.state.CD * this.state.atk * x
+                    )
+                    .reduce((a, b) => a + b, 0)
+                )}
+              </h5>
+            </Col>
           </Row>
         </Grid>
       </div>
@@ -284,7 +386,7 @@ function Atkslider(props) {
   const [atkvalue, setatkValue] = React.useState(0);
   return (
     <Row>
-      <Col md={15}>
+      <Col md={10}>
         <Slider
           progress
           min={0}
