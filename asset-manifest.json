@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/Genshin-Dmg-Calc/static/css/main.a5895872.chunk.css",
-    "main.js": "/Genshin-Dmg-Calc/static/js/main.fba81868.chunk.js",
-    "main.js.map": "/Genshin-Dmg-Calc/static/js/main.fba81868.chunk.js.map",
+    "main.js": "/Genshin-Dmg-Calc/static/js/main.f4736f7e.chunk.js",
+    "main.js.map": "/Genshin-Dmg-Calc/static/js/main.f4736f7e.chunk.js.map",
     "runtime-main.js": "/Genshin-Dmg-Calc/static/js/runtime-main.5de637c3.js",
     "runtime-main.js.map": "/Genshin-Dmg-Calc/static/js/runtime-main.5de637c3.js.map",
     "static/css/2.e133fd2b.chunk.css": "/Genshin-Dmg-Calc/static/css/2.e133fd2b.chunk.css",
-    "static/js/2.a1f0b5a5.chunk.js": "/Genshin-Dmg-Calc/static/js/2.a1f0b5a5.chunk.js",
-    "static/js/2.a1f0b5a5.chunk.js.map": "/Genshin-Dmg-Calc/static/js/2.a1f0b5a5.chunk.js.map",
+    "static/js/2.91bcc2a2.chunk.js": "/Genshin-Dmg-Calc/static/js/2.91bcc2a2.chunk.js",
+    "static/js/2.91bcc2a2.chunk.js.map": "/Genshin-Dmg-Calc/static/js/2.91bcc2a2.chunk.js.map",
     "static/js/3.6ab33a67.chunk.js": "/Genshin-Dmg-Calc/static/js/3.6ab33a67.chunk.js",
     "static/js/3.6ab33a67.chunk.js.map": "/Genshin-Dmg-Calc/static/js/3.6ab33a67.chunk.js.map",
     "index.html": "/Genshin-Dmg-Calc/index.html",
     "static/css/2.e133fd2b.chunk.css.map": "/Genshin-Dmg-Calc/static/css/2.e133fd2b.chunk.css.map",
     "static/css/main.a5895872.chunk.css.map": "/Genshin-Dmg-Calc/static/css/main.a5895872.chunk.css.map",
-    "static/js/2.a1f0b5a5.chunk.js.LICENSE.txt": "/Genshin-Dmg-Calc/static/js/2.a1f0b5a5.chunk.js.LICENSE.txt"
+    "static/js/2.91bcc2a2.chunk.js.LICENSE.txt": "/Genshin-Dmg-Calc/static/js/2.91bcc2a2.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5de637c3.js",
     "static/css/2.e133fd2b.chunk.css",
-    "static/js/2.a1f0b5a5.chunk.js",
+    "static/js/2.91bcc2a2.chunk.js",
     "static/css/main.a5895872.chunk.css",
-    "static/js/main.fba81868.chunk.js"
+    "static/js/main.f4736f7e.chunk.js"
   ]
 }
